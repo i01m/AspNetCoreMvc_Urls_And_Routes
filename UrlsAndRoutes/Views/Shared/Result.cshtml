@@ -1,0 +1,45 @@
+﻿@model Result
+@{ Layout = null; }
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Routing</title>
+    <link href="~/lib/bootstrap/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body class="m-1 p-1">
+    <table class="table table-bordered table-striped table-sm">
+        <tr><th>Controller:</th><td>@Model.Controller</td></tr>
+        <tr><th>Action:</th><td>@Model.Action</td></tr>
+        @foreach (string key in Model.Data.Keys)
+        {
+            <tr><th>@key :</th><td>@Model.Data[key]</td></tr>
+        }
+    </table>
+    @*<a asp-action="CustomVariable">This is an outgoing URL - targets the same controller</a>
+        <br />
+        <a asp-controller="Admin" asp-action="Index">This targers another controller</a>
+        <br />
+
+        Customer controller uses Route attribute, that's why the line below generate the special link format
+        <a asp-controller="Customer" asp-action="Index">This is outgoing URL to another controller</a>*@
+
+    @*adding fully qualified url*@
+    @*<a asp-controller="Home" asp-action="Index" asp-route-id="Hello" asp-protocol="https" asp-host="myserver.mydomain.com" 
+       asp-fragment="myFragment">
+        This is outgoing URL
+    </a>*@
+    <br/>
+    <a asp-controller="Home" asp-action="Index" asp-route-id="Hello">
+        This is outgoing URL
+    </a>
+
+    <br />
+    <a asp-route="out">This is outbound URL using named route</a>
+
+    <br />
+    @*URLs without surrounding html - URLs not clickable links*@
+    <p>URL: @Url.Action("CustomerVariable", "Home", new { id = 100 })</p>
+</body>
+</html>
